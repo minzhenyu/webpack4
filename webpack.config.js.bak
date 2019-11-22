@@ -1,0 +1,38 @@
+const path = require('path');//这里不能import
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require("clean-webpack-plugin"); //webpack 会报错这的写法发生了改变
+const webpack = require('webpack');
+module.exports = {
+    mode: 'production', //development  //需要去除无用的文件并且压缩 需要使用production模式打包  "sideEffects": ["*.css"],  false除了数组内容他都按需打包
+    entry: {
+        app: './src/index.js',
+        // print: './src/print.js'
+    },//入口文件
+    devtool: 'inline-source-map',
+    devServer: {
+        contentBase: './dist',
+        hot: true
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            }
+        ]
+    },
+    plugins: [
+        new CleanWebpackPlugin(),//webpack 会报错这的写法发生了改变
+        new HtmlWebpackPlugin({
+            title: 'Output Management'
+        }),
+        new webpack.NamedModulesPlugin(),
+        new webpack.HotModuleReplacementPlugin()
+    ],
+    output: {
+        filename: '[name].bundle.js',  //打包后文件名
+        path: path.resolve(__dirname, 'dist'),//出口文件
+        // publicPath: '/'
+    }
+
+};
