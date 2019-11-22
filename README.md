@@ -16,7 +16,7 @@ webpack4 下前端自动化打包插件集成
 #用法
 npm run:
   start: 开发环境热更新
-  build: 生产环境打包
+  build: 生产环境打包(会自动压缩代码节省空间)
   watch: 开发环境监视
   server: 服务器环境node启动(服务器下 应为模块的异步加载   seo需要这块)
   
